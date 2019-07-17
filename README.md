@@ -1,5 +1,5 @@
 # labofolio-front
 
 ```
-labofolio-front = vue + web-api sample
+labofolio-front = svelte + web-api sample
 ```

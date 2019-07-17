@@ -1,0 +1,38 @@
+{
+  "name": "labofolio-front",
+  "version": "1.0.0",
+  "description": "``` labofolio-front = svelte + web-api sample ```",
+  "main": "dist/bundle.js",
+  "dependencies": {},
+  "devDependencies": {
+    "commander": "^2.20.0",
+    "npm-run-all": "^4.1.5",
+    "pug-cli": "^1.0.0-alpha6",
+    "rollup": "^1.17.0",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-svelte": "^5.1.0",
+    "svelte": "^3.6.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "run-s build:clean build:prepare build:html build:rollup",
+    "build:clean": "rm -rf dist",
+    "build:prepare": "mkdir -p dist",
+    "build:html": "pug public/index.pug --out dist",
+    "build:rollup": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foway0/labofolio-front.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/foway0/labofolio-front/issues"
+  },
+  "homepage": "https://github.com/foway0/labofolio-front#readme",
+  "directories": {
+    "test": "test"
+  }
+}
