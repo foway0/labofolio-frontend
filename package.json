@@ -10,8 +10,11 @@
     "pug-cli": "^1.0.0-alpha6",
     "rollup": "^1.17.0",
     "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-livereload": "^1.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-svelte": "^5.1.0",
+    "rollup-plugin-terser": "^5.1.1",
     "svelte": "^3.6.7"
   },
   "scripts": {
@@ -20,7 +23,9 @@
     "build:clean": "rm -rf dist",
     "build:prepare": "mkdir -p dist",
     "build:html": "pug public/index.pug --out dist",
-    "build:rollup": "rollup -c"
+    "build:rollup": "rollup -c",
+    "start": "run-s build:clean build:prepare build:html build:watch",
+    "build:watch": "rollup -c -w"
   },
   "repository": {
     "type": "git",
