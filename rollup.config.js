@@ -12,9 +12,10 @@ import env from 'dotenv';
 
 env.config();
 
-const mode = process.env.SERVICE_ENV || 'local';
+const prod = process.env.SERVICE_ENV || 'local';
 const host = process.env.SERVICE_HOST;
 const port = process.env.SERVICE_PORT;
+const mode = process.env.SERVICE_MODE;
 
 export default {
   input: 'src/index.js',
@@ -36,15 +37,18 @@ export default {
     }),
     resolve(),
     commonjs(),
-    mode === 'local' && livereload('public'),
     // FIXME prd
-    mode === 'local' && terser(),
-    serve({
+    prod === 'local' && terser(),
+    mode === 'watch' && serve({
       contentBase: path.join(__dirname, 'dist'),
       historyApiFallback: true,
       host: host,
       port: port,
-    })
+    }),
+    mode === 'watch' && livereload({
+      watch: 'dist',
+      verbose: true, // Disable console output
+    }),
   ],
   watch: {
     clearScreen: false

@@ -22,12 +22,12 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "run-s build:clean build:prepare build:html build:rollup",
+    "build": "SERVICE_MODE=build run-s build:clean build:prepare build:html build:rollup",
     "build:clean": "rm -rf dist",
     "build:prepare": "mkdir -p dist",
     "build:html": "pug public/index.pug --out dist",
     "build:rollup": "rollup -c",
-    "start": "run-s build:clean build:prepare build:html build:watch",
+    "start": "SERVICE_MODE=watch run-s build:clean build:prepare build:html build:watch",
     "build:watch": "rollup -c -w"
   },
   "repository": {
