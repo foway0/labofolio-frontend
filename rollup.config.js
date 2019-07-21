@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'path';
 
 import pkg from './package.json';
 import svelte from 'rollup-plugin-svelte';
@@ -7,7 +7,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
-import replace from 'rollup-plugin-replace'
+import replace from 'rollup-plugin-replace';
 import env from 'dotenv';
 
 env.config();
@@ -20,7 +20,7 @@ const mode = process.env.SERVICE_MODE;
 export default {
   input: 'src/index.js',
   output: {
-    sourcemap: true,
+    sourcemap: prod === 'local',
     name: 'app',
     file: pkg.main,
     format: 'iife'
@@ -30,9 +30,9 @@ export default {
       'process.env.API_URL': process.env.API_URL,
     }),
     svelte({
-      dev: true,
+      dev: prod === 'local',
       css: css => {
-        css.write('dist/bundle.css');
+        css.write('dist/bundle.css', prod === 'local');
       }
     }),
     resolve(),
