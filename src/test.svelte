@@ -1,18 +1,7 @@
 <script>
+  import {get} from './utils/fetch';
   export let name;
-  let promise = getSample();
-
-  async function getSample() {
-    const res = await fetch(`http://localhost/sample/1`);
-    const text = await res.text();
-    console.log(text);
-
-    if (res.ok) {
-      return JSON.stringify(text);
-    } else {
-      throw new Error(text);
-    }
-  }
+  let promise = get('/sample/1');
 </script>
 
 <style>

@@ -7,8 +7,14 @@ import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
+import replace from 'rollup-plugin-replace'
+import env from 'dotenv';
+
+env.config();
 
 const mode = process.env.SERVICE_ENV || 'local';
+const host = process.env.SERVICE_HOST;
+const port = process.env.SERVICE_PORT;
 
 export default {
   input: 'src/index.js',
@@ -19,6 +25,9 @@ export default {
     format: 'iife'
   },
   plugins: [
+    replace({
+      'process.env.API_URL': process.env.API_URL,
+    }),
     svelte({
       dev: true,
       css: css => {
@@ -33,8 +42,8 @@ export default {
     serve({
       contentBase: path.join(__dirname, 'dist'),
       historyApiFallback: true,
-      host: 'localhost',
-      port: 8080,
+      host: host,
+      port: port,
     })
   ],
   watch: {
