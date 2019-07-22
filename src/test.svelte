@@ -4,19 +4,13 @@
   let promise = get('/sample/1');
 </script>
 
-<style>
-  h1 {
-    color: blue;
-  }
-</style>
-
 <template lang="pug">
-  h1 {name}!!!
+  h1#test_h1 {name}!!!???
 
   +await('promise')
     p ...waiting
     +then('stringify')
-      p The result is {stringify}
+      p#test_success The result is {stringify}
     +catch('error')
-      p(style="color: red") {error.message}
+      p#test_error {error.message}
 </template>

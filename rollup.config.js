@@ -9,6 +9,7 @@ import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
 import replace from 'rollup-plugin-replace';
 import autoPreprocess from 'svelte-preprocess';
+import sass from 'rollup-plugin-sass';
 
 import env from 'dotenv';
 
@@ -31,13 +32,17 @@ export default {
     replace({
       'process.env.API_URL': process.env.API_URL,
     }),
+    // TODO しょぼいので他の方法を考えましょう
+    sass({
+      output: 'dist/bundle.css',
+    }),
     svelte({
-      // TODO customize ???
+      // TODO customize ??? mixinが気に入らない場合はカスタマイズしましょう
       preprocess: autoPreprocess({}),
       dev: prod === 'local',
-      css: css => {
+      /*css: css => {
         css.write('dist/bundle.css', prod === 'local');
-      }
+      }*/
     }),
     resolve(),
     commonjs(),
@@ -50,7 +55,7 @@ export default {
       port: port,
     }),
     mode === 'watch' && livereload({
-      watch: 'dist',
+      watch: ['src', 'public'],
       verbose: true, // Disable console output
     }),
   ],
