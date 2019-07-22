@@ -20,7 +20,8 @@
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-svelte": "^5.1.0",
     "rollup-plugin-terser": "^5.1.1",
-    "svelte": "^3.6.7"
+    "svelte": "^3.6.7",
+    "svelte-preprocess": "^2.15.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -46,5 +47,7 @@
   "directories": {
     "test": "test"
   },
-  "eslintIgnore": ["dist"]
+  "eslintIgnore": [
+    "dist"
+  ]
 }

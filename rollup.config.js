@@ -8,6 +8,8 @@ import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
 import replace from 'rollup-plugin-replace';
+import autoPreprocess from 'svelte-preprocess';
+
 import env from 'dotenv';
 
 env.config();
@@ -30,6 +32,8 @@ export default {
       'process.env.API_URL': process.env.API_URL,
     }),
     svelte({
+      // TODO customize ???
+      preprocess: autoPreprocess({}),
       dev: prod === 'local',
       css: css => {
         css.write('dist/bundle.css', prod === 'local');

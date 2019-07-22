@@ -10,12 +10,13 @@
   }
 </style>
 
-<h1>{name}!!!</h1>
+<template lang="pug">
+  h1 {name}!!!
 
-{#await promise}
-  <p>...waiting</p>
-{:then stringify}
-  <p>The result is {stringify}</p>
-{:catch error}
-  <p style="color: red">{error.message}</p>
-{/await}
+  +await('promise')
+    p ...waiting
+    +then('stringify')
+      p The result is {stringify}
+    +catch('error')
+      p(style="color: red") {error.message}
+</template>
