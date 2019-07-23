@@ -1,11 +1,11 @@
 <script>
-  import {get} from './utils/fetch';
-  export let name;
+  import {get} from '../utils/fetch';
   let promise = get('/sample/1');
 </script>
 
 <template lang="pug">
-  h1#test_h1 {name}!!!???
+  div#layout_sample
+    h1 SAMPLE PAGES!!!
 
   +await('promise')
     p ...waiting

@@ -1,7 +1,11 @@
-import Test from './test.svelte';
+// TODO import dependencies
+import '../public/css/global.sass';
 import '../public/css/test.sass';
+import '../public/css/layout.sass';
 
-const app = new Test({
+import Main from './Main.svelte';
+
+const app = new Main({
   target: document.body,
   props: {
     name: 'HELLO WORLD'
