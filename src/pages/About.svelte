@@ -4,5 +4,5 @@
 
 <template lang="pug">
   div#layout_about
-    h1 {t('about.title')}
+    h1 {$t('about.title')}
 </template>

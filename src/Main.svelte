@@ -4,11 +4,12 @@
   import active from 'svelte-spa-router/active';
 
   import {t, i18next} from '../src/core/context';
-  const bar = t('common.navigation_bar', {returnObjects: true});
+  const bar = $t('common.navigation_bar', {returnObjects: true});
   import routes from './routes';
 
   function handleClick() {
     i18next.changeLanguage(this.innerHTML);
+    t.update(t=> t);
   }
 </script>
 <template lang="pug">

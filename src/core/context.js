@@ -10,8 +10,12 @@ ko.common = common;
 
 class Context {
   constructor() {
-    this.config = config;
-    this.constant = constant;
+    if(! Context.instance){
+      this.config = config;
+      this.constant = constant;
+      Context.instance = this;
+    }
+    return Context.instance;
   }
 
   init() {
@@ -35,6 +39,8 @@ class Context {
   }
 }
 
+import { writable } from 'svelte/store';
+const context = new Context();
 export {i18next};
-export const t = (text, options = {}) => { return i18next.t(text, options) };
-export default new Context();
+export const t = writable((text, options = {}) => { return i18next.t(text, options) });
+export default context;
