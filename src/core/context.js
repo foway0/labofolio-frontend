@@ -42,5 +42,5 @@ class Context {
 import { writable } from 'svelte/store';
 const context = new Context();
 export {i18next};
-export const t = writable((text, options = {}) => { return i18next.t(text, options) });
+export const t = writable((text, options = {}) => { return i18next.t(text, options); });
 export default context;

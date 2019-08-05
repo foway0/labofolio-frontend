@@ -10,10 +10,14 @@ labofolio-front = svelte + web-api sample
     - css
         - global.sass
         - layout.sass
-        - components
-            - etc
-        - pages
-            - etc
+        - variables.css
+        - etc
+    - img
+        - favicon
+        - etc
+    - font
+        - menlo
+        - etc
     index.pug
 - src
     - components
@@ -21,11 +25,11 @@ labofolio-front = svelte + web-api sample
     - pages
         - etc
     - shared
+        - locale
+            - ja
+            - ko
         - config
         - constant
-    - utils
-        - fetch
-        - etc
     - index.js
     - Main.svelte
     - routes.js
@@ -36,7 +40,7 @@ labofolio-front = svelte + web-api sample
 - [x] spa router
 - [x] sass
 - [x] pug
-- [x] fetch
-- [ ] i18next
+- [ ] fetch
+- [x] i18next
 - [ ] components
 - [ ] versioning
