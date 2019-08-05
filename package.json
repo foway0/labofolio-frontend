@@ -4,7 +4,8 @@
   "description": "``` labofolio-front = svelte + web-api sample ```",
   "main": "dist/bundle.js",
   "dependencies": {
-    "dotenv": "^8.0.0"
+    "dotenv": "^8.0.0",
+    "i18next": "^17.0.8"
   },
   "devDependencies": {
     "commander": "^2.20.0",
