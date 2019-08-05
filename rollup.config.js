@@ -46,8 +46,7 @@ export default {
     }),
     resolve(),
     commonjs(),
-    // FIXME prd
-    prod === 'local' && terser(),
+    prod === 'prd' && terser(),
     mode === 'watch' && serve({
       contentBase: path.join(__dirname, 'dist'),
       historyApiFallback: true,

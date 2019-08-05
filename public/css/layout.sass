@@ -1,26 +1,50 @@
 @charset "UTF-8"
 
-$debug: true
-$color: #F1F1F1
+@import "variables"
+
+.active
+  color: black
 
 #layout
   &_main_svelte
     padding: auto
-    @if($debug)
+    background-color: $color
+  &_navigation_bar
+    ul
+      list-style-type: none
+      margin: 0
+      padding: 0
+      overflow: hidden
       background-color: $color
-  &_links
-    padding: auto
-    @if($debug)
-      background-color: $color
+      #contact
+        float: right
+    li
+      float: left
+      a
+        display: block
+        color: black
+        text-align: center
+        padding: 14px 16px
+        text-decoration: none
+        &:hover:not(.active)
+          background-color: white
+        &.active
+          background-color: #4CAF50
   &_home
     padding: auto
-    @if($debug)
-      background-color: $color
-  &_sample
+    background-color: $color
+  &_about
     padding: auto
-    @if($debug)
-      background-color: $color
+    background-color: $color
+  &_blog
+    padding: auto
+    background-color: $color
+  &_lab
+    padding: auto
+    background-color: $color
+  &_contact
+    padding: auto
+    background-color: $color
   &_not_found
     padding: auto
-    @if($debug)
-      background-color: $color
+    background-color: $color

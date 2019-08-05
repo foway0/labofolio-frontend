@@ -1,6 +1,5 @@
 // TODO import dependencies
 import '../public/css/global.sass';
-import '../public/css/test.sass';
 import '../public/css/layout.sass';
 
 import Main from './Main.svelte';

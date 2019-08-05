@@ -12,14 +12,17 @@
     | <Router {routes}/>
     block
 
-  div#layout_main_svelte
-    h1#test_h1 {name}!!!???
-
-  div#layout_links
+  div#layout_navigation_bar
     ul
       li
         a(href="/" 'use:link' 'use:active') Home
       li
-        a(href="/sample" 'use:link') Sample
+        a(href="/about" 'use:link' 'use:active') About
+      li
+        a(href="/blog" 'use:link' 'use:active') Blog
+      li
+        a(href="/lab" 'use:link' 'use:active') Lab
+      li#contact
+        a(href="/contact" 'use:link' 'use:active') Contact
   +Router('routes')
 </template>
