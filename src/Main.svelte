@@ -11,6 +11,27 @@
     i18next.changeLanguage(this.innerHTML);
     t.update(t=> t);
   }
+
+  let accessToken;
+  let loggedIn = !!localStorage.getItem('token');
+
+  $: if(accessToken) {
+    localStorage.setItem('token', accessToken);
+    loggedIn = !!localStorage.getItem('token');
+  }
+
+  function login() {
+    document.domain = "localhost";
+    window.authenticateCallback = function(token){
+      accessToken = token;
+    };
+    window.open('http://localhost/auth/google');
+  }
+
+  function logout() {
+    localStorage.removeItem('token');
+    loggedIn = false;
+  }
 </script>
 <template lang="pug">
   mixin Router(routes)
@@ -32,4 +53,8 @@
   +Router('routes')
   button('on:click={handleClick}') ja
   button('on:click={handleClick}') ko
+  +if('loggedIn')
+    button('on:click={logout}') logout
+    +else()
+      button('on:click={login}') login
 </template>
