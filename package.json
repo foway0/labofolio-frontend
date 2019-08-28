@@ -2,7 +2,7 @@
   "name": "labofolio-front",
   "version": "1.0.0",
   "description": "``` labofolio-front = svelte + web-api sample ```",
-  "main": "dist/bundle.js",
+  "main": "dist/js/bundle.js",
   "dependencies": {
     "i18next": "^17.0.8"
   },
@@ -29,13 +29,14 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "SERVICE_MODE=build run-s build:clean build:prepare build:html build:img build:rollup",
+    "build": "SERVICE_MODE=build run-s build:clean build:prepare build:html build:img build:font build:rollup",
     "build:clean": "rm -rf dist",
     "build:prepare": "mkdir -p dist",
     "build:html": "pug public/index.pug --out dist",
     "build:img": "imagemin public/img --out-dir=dist/img",
+    "build:font": "imagemin public/font --out-dir=dist/font",
     "build:rollup": "rollup -c",
-    "start": "SERVICE_MODE=watch run-s build:clean build:prepare build:html build:img build:watch",
+    "start": "SERVICE_MODE=watch run-s build:clean build:prepare build:html build:img build:font build:watch",
     "build:watch": "rollup -c -w",
     "eslint": "eslint --ext .js ./"
   },
