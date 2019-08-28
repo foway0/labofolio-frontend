@@ -34,7 +34,7 @@ export default {
     }),
     // TODO しょぼいので他の方法を考えましょう
     sass({
-      output: 'dist/bundle.css',
+      output: 'dist/css/bundle.css',
     }),
     svelte({
       // TODO customize ??? mixinが気に入らない場合はカスタマイズしましょう
