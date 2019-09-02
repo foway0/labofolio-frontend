@@ -1,8 +1,92 @@
 <script>
   import {t} from '../../src/core/context';
+  import context from '../../src/core/context';
+  const constant = context.constant;
+  const API_URL = context.config.API_URL;
+
+  const roleId = Number(localStorage.getItem('role'));
+  const token = localStorage.getItem('token');
+  async function postBlogs() {
+    console.log('?');
+    window.alert('?');
+    const strings = [];
+    let string = `${encodeURIComponent('subject')}=${encodeURIComponent(subject)}`;
+    strings.push(string);
+    string = `${encodeURIComponent('content_md')}=${encodeURIComponent(simpleMde.value())}`;
+    strings.push(string);
+    string = `${encodeURIComponent('status')}=${encodeURIComponent(Number(yes).toString())}`;
+    strings.push(string);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', token);
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      body: strings.join('&'),
+      headers: headers,
+    };
+    const res = await fetch(`http://localhost/blogs`, options);
+
+    if (res.ok) {
+      promise = list();
+    }
+  }
+
+  let promise = list();
+  async function list() {
+    const res = await fetch(`http://localhost/blogs`);
+    const text = await res.text();
+    if (res.ok) {
+      return JSON.parse(text);
+    } else {
+      throw new Error(text);
+    }
+  }
+  
+  import { onMount } from 'svelte';
+
+  let simpleMde;
+  let subject = '';
+  let yes = false;
+
+  onMount(() => {
+    simpleMde = new SimpleMDE({
+      element: document.getElementById("demo1"),
+      spellChecker: false,
+    });
+  });
 </script>
 
 <template lang="pug">
+  mixin chtml(item)
+    | {@html item.content_html}
+    block
+
   div#layout_blog
     h1 {$t('blog.title')}
+    +if('roleId === constant.ROLE.admin')
+      h1 hello admin!
+    +if('roleId === constant.ROLE.viewer')
+      h1 hello viewer!
+    +if('roleId === constant.ROLE.admin')
+      div#layout_blog_form
+        form('on:submit|preventDefault={postBlogs}')
+          h1 subjects
+          input(type='text' 'bind:value={subject}')
+          h1 is private
+          input(type='checkbox' 'bind:checked={yes}')
+          h1 contents
+          textarea(id='demo1' style='display: none;')
+          button('on:submit') i love post
+    div#layout_blog_list
+      +await('promise')
+        p ...waiting
+        +then('items')
+          +each('items as item')
+            div#layout_blog_list_subject
+              h1 {item.subject}
+            div#layout_blog_list_content
+              +chtml('item')
+        +catch('error')
+          p(style="color: red") {error.message}
 </template>

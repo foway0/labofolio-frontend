@@ -31,6 +31,7 @@ export default {
   plugins: [
     replace({
       'process.env.API_URL': process.env.API_URL,
+      'process.env.API_DOMAIN': process.env.API_DOMAIN,
     }),
     // TODO しょぼいので他の方法を考えましょう
     sass({

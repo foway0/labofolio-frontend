@@ -2,8 +2,8 @@ import context from './core/context';
 context.init();
 
 // TODO import dependencies
-import '../public/css/global.sass';
-import '../public/css/layout.sass';
+import '../public/sass/global.sass';
+import '../public/sass/layout.sass';
 
 import Main from './Main.svelte';
 

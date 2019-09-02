@@ -5,6 +5,9 @@
 
   import {t, i18next} from '../src/core/context';
   const bar = $t('common.navigation_bar', {returnObjects: true});
+  import context from '../src/core/context';
+  const API_URL = context.config.API_URL;
+  const API_DOMAIN = context.config.API_DOMAIN;
   import routes from './routes';
 
   function handleClick() {
@@ -12,7 +15,7 @@
     t.update(t=> t);
   }
 
-  let accessToken;
+  let accessToken, roleId;
   let loggedIn = !!localStorage.getItem('token');
 
   $: if(accessToken) {
@@ -20,16 +23,22 @@
     loggedIn = !!localStorage.getItem('token');
   }
 
+  $: if(roleId) {
+    localStorage.setItem('role', roleId);
+  }
+
   function login() {
-    document.domain = "localhost";
-    window.authenticateCallback = function(token){
+    document.domain = API_DOMAIN;
+    window.authenticateCallback = (token, role) => {
       accessToken = token;
+      roleId = role;
     };
-    window.open('http://localhost/auth/google');
+    window.open(`${API_URL}/auth/google`);
   }
 
   function logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     loggedIn = false;
   }
 </script>
