@@ -15,10 +15,6 @@
     t.update(t=> t);
   }
 
-  $: if($user) {
-    console.log($user);
-  }
-
   function login() {
     document.domain = API_DOMAIN;
     window.authenticateCallback = (token, role) => {

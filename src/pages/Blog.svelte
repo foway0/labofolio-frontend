@@ -39,12 +39,16 @@
   
   import { afterUpdate } from 'svelte';
 
-  let simpleMde;
+  let simpleMde, isRendered = false;
+  $: if($user.role !== constant.ROLE.admin) {
+    isRendered = false;
+  }
   let subject = '';
   let yes = false;
 
   afterUpdate(() => {
-    if($user.token && $user.role === constant.ROLE.admin) {
+    if(!isRendered && $user.token && $user.role === constant.ROLE.admin) {
+      isRendered = true;
       simpleMde = new SimpleMDE({
         element: document.getElementById("demo1"),
         spellChecker: false,
