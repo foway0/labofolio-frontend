@@ -8,11 +8,14 @@ import ko from '../shared/locale/ko';
 ja.common = common;
 ko.common = common;
 
+import fetch from './fetch';
+
 class Context {
   constructor() {
     if(! Context.instance){
       this.config = config;
       this.constant = constant;
+      this.fetch = fetch;
       Context.instance = this;
     }
     return Context.instance;

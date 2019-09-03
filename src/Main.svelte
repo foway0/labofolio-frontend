@@ -43,7 +43,7 @@
   }
 </script>
 <template lang="pug">
-  include mixins
+  include ./core/mixins
 
   div#layout_navigation_bar
     ul

@@ -7,23 +7,21 @@
   let roleId = Number(localStorage.getItem('role'));
   let token = localStorage.getItem('token');
   async function postBlogs() {
-    const strings = [];
-    let string = `${encodeURIComponent('subject')}=${encodeURIComponent(subject)}`;
-    strings.push(string);
-    //string = `${encodeURIComponent('content_md')}=${encodeURIComponent(simpleMde.value())}`;
-    strings.push(string);
-    string = `${encodeURIComponent('status')}=${encodeURIComponent(Number(yes).toString())}`;
-    strings.push(string);
+    const body = {
+      subject: subject,
+      status: Number(yes).toString(),
+      content_md: simpleMde.value(),
+    };
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', token);
     const options = {
       method: 'POST',
       mode: 'cors',
-      body: strings.join('&'),
+      body: body,
       headers: headers,
     };
-    const res = await fetch(`http://localhost/blogs`, options);
+    const res = await context.fetch(`${API_URL}/blogs`, options);
 
     if (res.ok) {
       promise = list();
@@ -32,7 +30,7 @@
 
   let promise = list();
   async function list() {
-    const res = await fetch(`http://localhost/blogs`);
+    const res = await fetch(`${API_URL}/blogs`);
     const text = await res.text();
     if (res.ok) {
       return JSON.parse(text);
@@ -48,15 +46,17 @@
   let yes = false;
 
   onMount(() => {
-    simpleMde = new SimpleMDE({
-      element: document.getElementById("demo1"),
-      spellChecker: false,
-    });
+    if(token && roleId === constant.ROLE.admin) {
+      simpleMde = new SimpleMDE({
+        element: document.getElementById("demo1"),
+        spellChecker: false,
+      });
+    }
   });
 </script>
 
 <template lang="pug">
-  include ../mixins
+  include ../core/mixins
 
   div#layout_blog
     h1 {$t('blog.title')}
