@@ -16,6 +16,16 @@ class Context {
       this.config = config;
       this.constant = constant;
       this.fetch = fetch;
+      this.user = writable({
+        token: localStorage.getItem('token'),
+        role: Number(localStorage.getItem('role'))
+      });
+      this.user_derived = derived(this.user, () => {
+        return {
+          token: localStorage.getItem('token'),
+          role: Number(localStorage.getItem('role'))
+        }
+      });
       Context.instance = this;
     }
     return Context.instance;
@@ -42,8 +52,9 @@ class Context {
   }
 }
 
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 const context = new Context();
-export {i18next};
+const user_derived = context.user_derived;
+export {i18next, user_derived as user };
 export const t = writable((text, options = {}) => { return i18next.t(text, options); });
 export default context;

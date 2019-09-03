@@ -1,11 +1,9 @@
 <script>
-  import {t} from '../../src/core/context';
+  import {t, user} from '../../src/core/context';
   import context from '../../src/core/context';
   const constant = context.constant;
   const API_URL = context.config.API_URL;
 
-  let roleId = Number(localStorage.getItem('role'));
-  let token = localStorage.getItem('token');
   async function postBlogs() {
     const body = {
       subject: subject,
@@ -39,14 +37,14 @@
     }
   }
   
-  import { onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
 
   let simpleMde;
   let subject = '';
   let yes = false;
 
-  onMount(() => {
-    if(token && roleId === constant.ROLE.admin) {
+  afterUpdate(() => {
+    if($user.token && $user.role === constant.ROLE.admin) {
       simpleMde = new SimpleMDE({
         element: document.getElementById("demo1"),
         spellChecker: false,
@@ -60,7 +58,7 @@
 
   div#layout_blog
     h1 {$t('blog.title')}
-    +if('roleId === constant.ROLE.admin')
+    +if('!!$user.token && $user.role === constant.ROLE.admin')
       h1 hello admin!
       div#layout_blog_form
         form('on:submit|preventDefault={postBlogs}')

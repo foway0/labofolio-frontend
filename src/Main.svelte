@@ -3,7 +3,7 @@
   import {link} from 'svelte-spa-router';
   import active from 'svelte-spa-router/active';
 
-  import {t, i18next} from '../src/core/context';
+  import {t, i18next, user} from '../src/core/context';
   const bar = $t('common.navigation_bar', {returnObjects: true});
   import context from '../src/core/context';
   const API_URL = context.config.API_URL;
@@ -15,23 +15,16 @@
     t.update(t=> t);
   }
 
-  let accessToken, roleId;
-  let loggedIn = !!localStorage.getItem('token');
-
-  $: if(accessToken) {
-    localStorage.setItem('token', accessToken);
-    loggedIn = !!localStorage.getItem('token');
-  }
-
-  $: if(roleId) {
-    localStorage.setItem('role', roleId);
+  $: if($user) {
+    console.log($user);
   }
 
   function login() {
     document.domain = API_DOMAIN;
     window.authenticateCallback = (token, role) => {
-      accessToken = token;
-      roleId = role;
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+      context.user.update(t => t);
     };
     window.open(`${API_URL}/auth/google`);
   }
@@ -39,7 +32,7 @@
   function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
-    loggedIn = false;
+    context.user.update(t => t);
   }
 </script>
 <template lang="pug">
@@ -60,7 +53,7 @@
   +Router('routes')
   button('on:click={handleClick}') ja
   button('on:click={handleClick}') ko
-  +if('loggedIn')
+  +if('!!$user.token')
     button('on:click={logout}') logout
     +else()
       button('on:click={login}') login
