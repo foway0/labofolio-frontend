@@ -4,15 +4,13 @@
   const constant = context.constant;
   const API_URL = context.config.API_URL;
 
-  const roleId = Number(localStorage.getItem('role'));
-  const token = localStorage.getItem('token');
+  let roleId = Number(localStorage.getItem('role'));
+  let token = localStorage.getItem('token');
   async function postBlogs() {
-    console.log('?');
-    window.alert('?');
     const strings = [];
     let string = `${encodeURIComponent('subject')}=${encodeURIComponent(subject)}`;
     strings.push(string);
-    string = `${encodeURIComponent('content_md')}=${encodeURIComponent(simpleMde.value())}`;
+    //string = `${encodeURIComponent('content_md')}=${encodeURIComponent(simpleMde.value())}`;
     strings.push(string);
     string = `${encodeURIComponent('status')}=${encodeURIComponent(Number(yes).toString())}`;
     strings.push(string);
@@ -58,22 +56,17 @@
 </script>
 
 <template lang="pug">
-  mixin chtml(item)
-    | {@html item.content_html}
-    block
+  include ../mixins
 
   div#layout_blog
     h1 {$t('blog.title')}
     +if('roleId === constant.ROLE.admin')
       h1 hello admin!
-    +if('roleId === constant.ROLE.viewer')
-      h1 hello viewer!
-    +if('roleId === constant.ROLE.admin')
       div#layout_blog_form
         form('on:submit|preventDefault={postBlogs}')
           h1 subjects
           input(type='text' 'bind:value={subject}')
-          h1 is private
+          h1 is public
           input(type='checkbox' 'bind:checked={yes}')
           h1 contents
           textarea(id='demo1' style='display: none;')
@@ -84,7 +77,7 @@
         +then('items')
           +each('items as item')
             div#layout_blog_list_subject
-              h1 {item.subject}
+              h1 subject: {item.subject}
             div#layout_blog_list_content
               +chtml('item')
         +catch('error')

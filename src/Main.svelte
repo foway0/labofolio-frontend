@@ -43,9 +43,7 @@
   }
 </script>
 <template lang="pug">
-  mixin Router(routes)
-    | <Router {routes}/>
-    block
+  include mixins
 
   div#layout_navigation_bar
     ul
