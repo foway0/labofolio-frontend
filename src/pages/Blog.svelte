@@ -12,7 +12,7 @@
     };
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append('Authorization', token);
+    headers.append('Authorization', $user.token);
     const options = {
       method: 'POST',
       mode: 'cors',
@@ -23,6 +23,9 @@
 
     if (res.ok) {
       promise = list();
+      subject = '';
+      yes = false;
+      simpleMde.value('');
     }
   }
 
