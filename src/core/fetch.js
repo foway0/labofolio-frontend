@@ -12,7 +12,7 @@ const request = (URL, options = {}) => {
         for (const key in body) {
           const value = body[key];
           const string = `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-          strings.push(string)
+          strings.push(string);
         }
         options.body = strings.join('&');
         break;

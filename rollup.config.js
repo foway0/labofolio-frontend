@@ -13,12 +13,14 @@ import sass from 'rollup-plugin-sass';
 
 import env from 'dotenv';
 
-env.config();
-
 const prod = process.env.SERVICE_ENV || 'local';
+env.config({ path: `./${prod}.env` });
+
 const host = process.env.SERVICE_HOST;
 const port = process.env.SERVICE_PORT;
 const mode = process.env.SERVICE_MODE;
+const crt = process.env.SSL_CERT;
+const key = process.env.SSL_KEY;
 
 export default {
   input: 'src/index.js',
@@ -53,6 +55,10 @@ export default {
       historyApiFallback: true,
       host: host,
       port: port,
+      https: {
+        key: key,
+        cert: crt,
+      },
     }),
     mode === 'watch' && livereload({
       watch: ['src', 'public'],

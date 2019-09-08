@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import {writable, derived} from 'svelte/store';
 
 import config from '../shared/config';
 import constant from '../shared/constant';
@@ -12,7 +13,7 @@ import fetch from './fetch';
 
 class Context {
   constructor() {
-    if(! Context.instance){
+    if(! Context.instance) {
       this.config = config;
       this.constant = constant;
       this.fetch = fetch;
@@ -24,7 +25,7 @@ class Context {
         return {
           token: localStorage.getItem('token'),
           role: Number(localStorage.getItem('role'))
-        }
+        };
       });
       Context.instance = this;
     }
@@ -52,9 +53,8 @@ class Context {
   }
 }
 
-import { writable, derived } from 'svelte/store';
 const context = new Context();
 const user_derived = context.user_derived;
-export {i18next, user_derived as user };
+export {i18next, user_derived as user};
 export const t = writable((text, options = {}) => { return i18next.t(text, options); });
 export default context;
