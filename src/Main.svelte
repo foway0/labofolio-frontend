@@ -21,8 +21,8 @@ let promise = list();
   {:then object}
     <p>The count is {object.Count}</p>
     {#each object.Rows as item}
-      <p>{item.Subject}</p>
-      <p>{item.Message}</p>
+      <p>Id: {item.Id} {item.Subject}</p>
+      <p>{item.ContentMd}</p>
       <hr>
     {/each}
   {:catch error}
