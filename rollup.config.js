@@ -3,7 +3,11 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import serve from 'rollup-plugin-serve';
+import replace from 'rollup-plugin-replace';
 import path from "path";
+
+const crt = process.env.SSL_CERT;
+const key = process.env.SSL_KEY;
 
 export default {
   input: 'src/index.js',
@@ -14,6 +18,9 @@ export default {
     format: 'iife'
   },
   plugins: [
+    replace({
+      'API_URL': process.env.API_URL,
+    }),
     svelte({
       dev: 'local',
     }),
@@ -24,10 +31,10 @@ export default {
       historyApiFallback: true,
       host: 'localhost',
       port: 8080,
-      /*https: {
+      https: {
         key: key,
         cert: crt,
-      },*/
+      },
     }),
   ],
   watch: {
