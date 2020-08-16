@@ -1,6 +1,6 @@
 <script>
 async function list() {
-  const res = await fetch(`https://API_URL/ping`);
+  const res = await fetch(`https://API_URL/tests`);
   const text = await res.text();
   if (res.ok) {
     return JSON.parse(text);
