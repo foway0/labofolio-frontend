@@ -23,11 +23,7 @@ export default {
       'API_URL': process.env.API_URL,
     }),
     svelte({
-      preprocess: preprocess({
-        defaults: {
-          markup: 'pug',
-        },
-      }),
+      preprocess: preprocess(),
       dev: 'local',
     }),
     resolve(),

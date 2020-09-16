@@ -1,29 +1,29 @@
 <script>
-async function list() {
-  const res = await fetch(`https://API_URL/tests`);
-  const text = await res.text();
-  if (res.ok) {
-    return JSON.parse(text);
-  } else {
-    throw new Error(text);
+  import Router from 'svelte-spa-router';
+  import {link} from 'svelte-spa-router';
+  import active from 'svelte-spa-router/active';
+  import routes from './routes';
+  async function list() {
+    const res = await fetch(`https://API_URL/tests`);
+    const text = await res.text();
+    if (res.ok) {
+      return JSON.parse(text);
+    } else {
+      throw new Error(text);
+    }
   }
-}
-let promise = list();
+  let promise = list();
 </script>
 
 <template lang="pug">
-  h1 Hello World!
-  hr
-  h3 My first frontend develop
+  include ./shared/mixins
+
   div
-    +await('promise')
-      p ...waiting
-      +then('object')
-        +each('object.rows as item')
-          div
-            p Id: {item.id} : {item.subject}
-            p {item.content_md}
-          hr
-      +catch('error')
-        p(style="color: red") error.message
+    ul
+      li
+        a(href="/" 'use:link' 'use:active') Home
+      li
+        a(href="/about" 'use:link' 'use:active') About
+
+  +Router('routes')
 </template>
