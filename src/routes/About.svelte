@@ -1,4 +1,5 @@
+<!-- @formatter:off -->
 <template lang="pug">
-    div
+  div
     h1 HI About
 </template>

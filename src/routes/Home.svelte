@@ -8,9 +8,11 @@
       throw new Error(text);
     }
   }
+
   let promise = list();
 </script>
 
+<!-- @formatter:off -->
 <template lang="pug">
   h1 Hello World!
   hr

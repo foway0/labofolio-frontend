@@ -7,13 +7,13 @@
   "main": "dist/js/bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "run-s build:clean build:prepare build:html build:img build:rollup",
+    "build": "SERVICE_MODE=build run-s build:clean build:prepare build:html build:img build:rollup",
     "build:clean": "rm -rf dist",
     "build:prepare": "mkdir -p dist",
     "build:html": "pug public/index.pug --out dist",
     "build:img": "imagemin public/img --out-dir=dist/img",
     "build:rollup": "rollup -c",
-    "watch": "run-s build:clean build:prepare build:html build:img build:watch",
+    "watch": "SERVICE_MODE=watch run-s build:clean build:prepare build:html build:img build:watch",
     "build:watch": "rollup -c -w"
   },
   "dependencies": {},

@@ -1,8 +1,9 @@
 <script>
-  import Router from 'svelte-spa-router';
-  import {link} from 'svelte-spa-router';
-  import active from 'svelte-spa-router/active';
-  import routes from './routes';
+  import Router from "svelte-spa-router";
+  import { link } from "svelte-spa-router";
+  import active from "svelte-spa-router/active";
+  import routes from "./routes";
+
   async function list() {
     const res = await fetch(`https://API_URL/tests`);
     const text = await res.text();
@@ -12,9 +13,11 @@
       throw new Error(text);
     }
   }
+
   let promise = list();
 </script>
 
+<!-- @formatter:off -->
 <template lang="pug">
   include ./shared/mixins
 

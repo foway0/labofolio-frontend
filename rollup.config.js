@@ -9,6 +9,7 @@ import path from "path";
 
 const crt = process.env.SSL_CERT;
 const key = process.env.SSL_KEY;
+const mode = process.env.SERVICE_MODE;
 
 export default {
   input: 'src/index.js',
@@ -28,7 +29,7 @@ export default {
     }),
     resolve(),
     commonjs(),
-    serve({
+    mode === 'watch' && serve({
       contentBase: path.join(__dirname, 'dist'),
       historyApiFallback: true,
       host: 'localhost',
