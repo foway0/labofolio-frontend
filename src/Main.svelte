@@ -11,21 +11,19 @@ async function list() {
 let promise = list();
 </script>
 
-<h1>Hello world!</h1>
-<hr>
-<h3>My first frontend develop</h3>
-
-<div>
-  {#await promise}
-    <p>...waiting</p>
-  {:then object}
-    <p>The count is {object.count}</p>
-    {#each object.rows as item}
-      <p>Id: {item.id} {item.subject}</p>
-      <p>{item.content_md}</p>
-      <hr>
-    {/each}
-  {:catch error}
-    <p style="color: red">{error.message}</p>
-  {/await}
-</div>
+<template lang="pug">
+  h1 Hello World!
+  hr
+  h3 My first frontend develop
+  div
+    +await('promise')
+      p ...waiting
+      +then('object')
+        +each('object.rows as item')
+          div
+            p Id: {item.id} : {item.subject}
+            p {item.content_md}
+          hr
+      +catch('error')
+        p(style="color: red") error.message
+</template>

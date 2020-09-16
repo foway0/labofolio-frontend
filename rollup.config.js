@@ -4,6 +4,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import serve from 'rollup-plugin-serve';
 import replace from 'rollup-plugin-replace';
+import preprocess from 'svelte-preprocess';
 import path from "path";
 
 const crt = process.env.SSL_CERT;
@@ -22,6 +23,11 @@ export default {
       'API_URL': process.env.API_URL,
     }),
     svelte({
+      preprocess: preprocess({
+        defaults: {
+          markup: 'pug',
+        },
+      }),
       dev: 'local',
     }),
     resolve(),
