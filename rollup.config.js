@@ -11,6 +11,20 @@ const crt = process.env.SSL_CERT;
 const key = process.env.SSL_KEY;
 const mode = process.env.SERVICE_MODE;
 
+const serveOptions = {
+  contentBase: path.join(__dirname, 'dist'),
+  historyApiFallback: true,
+  host: 'localhost',
+  port: 8080,
+}
+
+if (crt && key) {
+  serveOptions.https = {
+    key: key,
+    cert: crt,
+  };
+}
+
 export default {
   input: 'src/index.js',
   output: {
@@ -29,16 +43,7 @@ export default {
     }),
     resolve(),
     commonjs(),
-    mode === 'watch' && serve({
-      contentBase: path.join(__dirname, 'dist'),
-      historyApiFallback: true,
-      host: 'localhost',
-      port: 8080,
-      https: {
-        key: key,
-        cert: crt,
-      },
-    }),
+    mode === 'watch' && serve(serveOptions),
   ],
   watch: {
     clearScreen: false
