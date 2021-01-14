@@ -5,6 +5,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import serve from 'rollup-plugin-serve';
 import replace from 'rollup-plugin-replace';
 import preprocess from 'svelte-preprocess';
+import sass from 'rollup-plugin-sass';
 import path from "path";
 
 const crt = process.env.SSL_CERT;
@@ -36,6 +37,9 @@ export default {
   plugins: [
     replace({
       'API_URL': process.env.API_URL,
+    }),
+    sass({
+      output: 'dist/css/bundle.css',
     }),
     svelte({
       preprocess: preprocess(),
